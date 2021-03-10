@@ -3,18 +3,22 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/app.js"
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "start": "tsc && node dist/src/app.js"
   },
   "author": "",
   "license": "ISC",
   "keywords": [],
   "description": "",
   "devDependencies": {
+    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.32",
     "axios": "^0.21.1",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.3",
     "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "typescript": "^3.9.9"
   },
   "dependencies": {}
 }

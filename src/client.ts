@@ -33,20 +33,20 @@ export default class Client {
     this.header = {'content-type': 'application/json','Authorization': 'Basic ' + Buffer.from(this.username + ":" + this.password).toString('base64')}
   }
 
-  public async checkConnection(): Promise<void> {
+  public async checkConnection(): Promise<string> {
     try {
       await axios({
         method: 'get',
         url: this.serverUrl,
         headers: this.header
       });
-      console.log('Connection successful');
+      return "Connection successful"
     } catch (error) {
-      throw new Error(error.response.data.description);
+      return error.response.data.description;
     }
   }
 
-  public async registerDevice(device: Device): Promise<void> {
+  public async registerDevice(device: Device): Promise<string> {
     try {
       let res = await axios({
         method: 'post',
@@ -54,10 +54,9 @@ export default class Client {
         data: device,
         headers: this.header
       });
-      console.log(res.data);
-      console.log("Registered device successfully");
+      return "Registered device successfully";
     } catch (error) {
-      console.log(error.response.data.description);
+      return error.response.data.description;
     }
   }
 
@@ -178,13 +177,14 @@ export default class Client {
         params: criteria,
         headers: this.header
       })
+      console.log(res.data);
       return Object.assign(new ProcessValue(), res.data)
     } catch (error) {
       throw new Error(error.response.data.description);
     }
   }
 
-  public async writeProcessData(deviceId: string, data: Array<DataNodeWriteValue>): Promise<void> {
+  public async writeProcessData(deviceId: string, data: Array<DataNodeWriteValue>): Promise<string> {
     try {
       let res = await axios({
         method: 'post',
@@ -192,8 +192,7 @@ export default class Client {
         data: data,
         headers: this.header
       })
-      console.log(res.data);
-      console.log("Write successfully");
+      return "Write successfully";
     } catch (error) {
       throw new Error(error.response.data.description);
     }

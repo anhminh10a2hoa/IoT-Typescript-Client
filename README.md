@@ -25,6 +25,13 @@ npm install
 npm start
 ```
 
+## Testing
++ The application is using Jest for testing
++ Run testing:
+```batch
+npm test
+```
+
 ## Usage
 
 ### Account
@@ -53,7 +60,7 @@ client.registerDevice(newDevice);
 ### Get a device
 ```typescript
 const device = await client.getDevice("device_id");
-  console.log(device.toString());
+console.log(device.toString());
 ```
 
 ### Get list of devices

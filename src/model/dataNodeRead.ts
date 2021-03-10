@@ -8,6 +8,10 @@ export default class DataNodeRead extends DataNodeBase {
     return this.values;
   }
 
+  public setValues(): Array<DataNodeReadValue> {
+    return this.values;
+  }
+
   public toStringDNR(): string {
     return this.toString();
   }
