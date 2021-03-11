@@ -6,6 +6,7 @@ import Device from "../src/model/device";
 import DeviceAttribute from "../src/model/deviceAttribute";
 import { DataType } from "../src/model/enumType";
 import ProcessValue from "../src/model/processValue";
+import { processValueData } from "./data";
 
 const client = new Client("https://my.iot-ticket.com/api/v1/", "", "");
 describe('Model test', function() {
@@ -44,32 +45,8 @@ describe('Model test', function() {
   })
 
   it("DataNodeRead model", async function() {
-    const data = {
-      href: 'https://my.iot-ticket.com/api/v1/process/read/abc?deviceId=abc&fromdate=1383228800000&todate=1550831791000&datanodes=%2FMainEngine%2FCore%2FTemperature',
-      datanodeReads: [
-        {
-          dataType: 'double',
-          unit: 'c',
-          name: 'Temperature',
-          path: 'MainEngine/Core',
-          values: [
-            {
-              v: "60",
-              ts: 1414488510057
-            }
-          ]
-        }
-      ]
-    }
-    let newProcessValue: ProcessValue = Object.assign(new ProcessValue(), data);
+    let newProcessValue: ProcessValue = Object.assign(new ProcessValue(), processValueData);
     expect(newProcessValue.getHref()).toBe("https://my.iot-ticket.com/api/v1/process/read/abc?deviceId=abc&fromdate=1383228800000&todate=1550831791000&datanodes=%2FMainEngine%2FCore%2FTemperature");
-    for(let dataNodeRead of newProcessValue.getDatanodeReads()) {
-      let dataNodeReadCastType = Object.assign(new DataNodeRead(), dataNodeRead)
-      expect(dataNodeReadCastType.toString()).toBe("Name: Temperature, Unit: c, DataType: double, Path: MainEngine/Core");
-      for(let value of dataNodeReadCastType.getValues()) {
-        let valueCastType = Object.assign(new DataNodeReadValue(), value)
-        expect(valueCastType.toStringDNRV()).toBe("Value: 60, Timestamp: 1414488510057");
-      }
-    }
+    expect(newProcessValue.getDatanodeReads()).toBe(processValueData.datanodeReads);
   })
 });

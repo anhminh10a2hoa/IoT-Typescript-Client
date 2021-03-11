@@ -1,13 +1,16 @@
 export default class Exception extends Error {
   private static serialVersionUID: number = -3510853523188440984;
-  private errorInfo: Error;
 
-  constructor(message: string, errorInfo: Error) {
+  constructor(private status: number, message: string) {
     super(message);
-    this.errorInfo = errorInfo;
+    this.status = status;
   }
 
-  public getErrorInfo(): Error {
-    return this.errorInfo;
+  public getStatus(): number {
+    return this.status;
+  }
+
+  public getMessage(): string {
+    return this.message;
   }
 }

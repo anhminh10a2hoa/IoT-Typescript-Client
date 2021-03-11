@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Exception from './exception/exception';
 import DataNode from './model/dataNode';
 import DataNodeWriteValue from './model/dataNodeWriteValue';
 import DataQueryCriteria from './model/dataQueryCriteria';
@@ -42,7 +43,7 @@ export default class Client {
       });
       return "Connection successful"
     } catch (error) {
-      return error.response.data.description;
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -56,7 +57,7 @@ export default class Client {
       });
       return "Registered device successfully";
     } catch (error) {
-      return error.response.data.description;
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -69,7 +70,7 @@ export default class Client {
       });
       return Object.assign(new Device(), res.data);
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -89,7 +90,7 @@ export default class Client {
       });
       return Object.assign(new PagedResult<Device>(), res.data);
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -110,7 +111,7 @@ export default class Client {
       });
       return Object.assign(new PagedResult<DataNode>(), res.data)
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -123,7 +124,7 @@ export default class Client {
       });
       return Object.assign(new Quota(), res.data)
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -136,7 +137,7 @@ export default class Client {
       });
       return Object.assign(new DeviceQuota(), res.data)
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -149,7 +150,7 @@ export default class Client {
       });
       console.log("Delete successfully");
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -165,7 +166,7 @@ export default class Client {
       });
       return Object.assign(new PagedResult<Enterprise>(), res.data)
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -180,7 +181,7 @@ export default class Client {
       console.log(res.data);
       return Object.assign(new ProcessValue(), res.data)
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -194,7 +195,7 @@ export default class Client {
       })
       return "Write successfully";
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 
@@ -208,7 +209,7 @@ export default class Client {
       })
       return Object.assign(new StatisticalDataValues(), res.data) 
     } catch (error) {
-      throw new Error(error.response.data.description);
+      throw new Exception(error.response.status, error.response.data.description);
     }
   }
 }
