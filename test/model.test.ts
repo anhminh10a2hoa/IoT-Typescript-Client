@@ -5,10 +5,8 @@ import DataNodeReadValue from "../src/model/dataNodeReadValue";
 import Device from "../src/model/device";
 import DeviceAttribute from "../src/model/deviceAttribute";
 import { DataType } from "../src/model/enumType";
-import ProcessValue from "../src/model/processValue";
-import { processValueData } from "./data";
+import { processValue, dataNodeRead } from "./data";
 
-const client = new Client("https://my.iot-ticket.com/api/v1/", "", "");
 describe('Model test', function() {
   it("Device model", async function() {
     const newDevice = new Device();
@@ -45,8 +43,6 @@ describe('Model test', function() {
   })
 
   it("DataNodeRead model", async function() {
-    let newProcessValue: ProcessValue = Object.assign(new ProcessValue(), processValueData);
-    expect(newProcessValue.getHref()).toBe("https://my.iot-ticket.com/api/v1/process/read/abc?deviceId=abc&fromdate=1383228800000&todate=1550831791000&datanodes=%2FMainEngine%2FCore%2FTemperature");
-    expect(newProcessValue.getDatanodeReads()).toBe(processValueData.datanodeReads);
+    expect(processValue.getHref()).toBe("https://my.iot-ticket.com/api/v1/process/read/abc?deviceId=abc&fromdate=1383228800000&todate=1550831791000&datanodes=%2FMainEngine%2FCore%2FTemperature");
   })
 });

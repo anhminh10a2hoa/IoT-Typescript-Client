@@ -11,7 +11,6 @@ import ProcessValue from './model/processValue';
 import Quota from './model/quota';
 import { StatisticalDataQueryCriteria } from './model/statisticalDataQueryCriteria';  
 import StatisticalDataValues from './model/statisticalDataValues';
-
 export default class Client {
   private static DevicesResource: string = "devices/";
   private static DataNodesResource: string = "/datanodes";
@@ -49,7 +48,7 @@ export default class Client {
 
   public async registerDevice(device: Device): Promise<string> {
     try {
-      let res = await axios({
+      await axios({
         method: 'post',
         url: this.serverUrl + Client.DevicesResource,
         data: device,

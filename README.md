@@ -3,6 +3,7 @@
 ## Table of contents
 * [Requirements](#requirements)
 * [Installation](#installation)
+* [Testing](#testing)
 * [Usage](#usage)
 * [API documentation](#api-documentation)
 
@@ -26,12 +27,23 @@ npm start
 ```
 
 ## Testing
+### Simple testing
 + The application is using Jest for testing
++ <b>NOTE: </b> If you want to run all of the test cases, create a file named .env in root folder
+and its contents like that:
+```env
+USERNAME_TICKET=your_username
+PASSWORD_TICKET=your_password
+```
 + Run testing:
 ```batch
 npm test
 ```
-
+### Coverage testing
++ If you want to check how many percentages this test cases cover of the application, run:
+```
+npm run coverage
+```
 ## Usage
 
 ### Account
@@ -106,8 +118,6 @@ criteria.setFromdate(1383228800000)
 criteria.setTodate(1550831791000)
 criteria.setGrouping(Grouping.Year);
 criteria.setDatanodes(["Temperature","sensor"]);
-criteria.getDatanodes();
-criteria.getTodate();
 
 const statisticalData = await client.readStatisticalData(criteria);
 for(let statisticalDataRead of statisticalData.getDatanodeReads()) {

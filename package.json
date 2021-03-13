@@ -20,5 +20,7 @@
     "tslint": "^5.12.1",
     "typescript": "^3.9.9"
   },
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
